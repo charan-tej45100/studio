@@ -18,8 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
-      {/* The <head> tag is managed by Next.js based on the metadata object and other optimizations. */}
-      {/* The Inter font is loaded via next/font, so manual <link> tags are not needed here. */}
+      {/*
+        Next.js App Router automatically manages the <head> tag and its content
+        based on the `metadata` object exported from this layout and other route segments,
+        and also handles font loading via `next/font`.
+        Explicit <head> tags are generally not needed here.
+      */}
       <body className={`${inter.variable} font-body antialiased min-h-screen flex flex-col bg-background text-foreground`}>
         <ThemeProvider
           attribute="class"
