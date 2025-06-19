@@ -1,3 +1,6 @@
+"use client";
+
+import Spline from '@splinetool/react-spline';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, FileText } from 'lucide-react';
 import Link from 'next/link';
@@ -5,17 +8,10 @@ import Link from 'next/link';
 export function HeroSection() {
   return (
     <section className="relative py-20 md:py-32 bg-gradient-to-br from-background to-primary/10 overflow-hidden">
-      <div className="absolute inset-0 opacity-5">
-        {/* Subtle background pattern - optional */}
-        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="heroGrid" width="50" height="50" patternUnits="userSpaceOnUse">
-              <circle cx="1" cy="1" r="1" fill="hsl(var(--accent) / 0.5)" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#heroGrid)" />
-        </svg>
-      </div>
+      <Spline
+        scene="https://prod.spline.design/QLD-o6Ytqgf9Y2W2/scene.splinecode"
+        className="absolute inset-0 w-full h-full"
+      />
       <div className="container mx-auto max-w-4xl px-4 text-center relative z-10">
         <h1 className="font-headline text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
           Charan
