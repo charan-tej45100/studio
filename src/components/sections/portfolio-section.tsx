@@ -7,7 +7,7 @@ import { ArrowUpRight } from 'lucide-react';
 
 const portfolioItems = [
   {
-    title: 'E-commerce Platform Redesign',
+    title: 'Done my Best',
     category: 'Web Development',
     imageUrl: 'https://placehold.co/600x400.png',
     dataAiHint: 'website interface',
@@ -76,3 +76,4 @@ export function PortfolioSection() {
     </section>
   );
 }
+
