@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import './globals.css';
 import { Inter } from 'next/font/google';
@@ -17,13 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
-      {/*
-        Next.js App Router automatically manages the <head> tag and its content
-        based on the `metadata` object exported from this layout and other route segments,
-        and also handles font loading via `next/font`.
-        Explicit <head> tags are generally not needed here.
-      */}
+    <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} font-body antialiased min-h-screen flex flex-col bg-background text-foreground`}>
         <ThemeProvider
           attribute="class"

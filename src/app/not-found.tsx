@@ -6,7 +6,7 @@ import { HomeIcon } from 'lucide-react';
 export default function NotFound() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-background text-center">
-      <h1 className="font-headline text-9xl font-extrabold tracking-tight animate-blink underline decoration-white" style={{ color: '#39FF14' }}>
+      <h1 className="font-headline text-9xl font-extrabold tracking-tight underline decoration-white" style={{ color: '#39FF14' }}>
         404
       </h1>
       <p className="mt-4 text-2xl font-medium text-foreground">
@@ -24,4 +24,3 @@ export default function NotFound() {
     </div>
   );
 }
-
