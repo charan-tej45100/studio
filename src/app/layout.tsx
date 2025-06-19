@@ -18,12 +18,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
-      <head>
-        {/* Google Fonts links are kept as per instructions, though Next/Font is also used here for Inter */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-      </head>
+      {/* The <head> tag is managed by Next.js based on the metadata object and other optimizations. */}
+      {/* The Inter font is loaded via next/font, so manual <link> tags are not needed here. */}
       <body className={`${inter.variable} font-body antialiased min-h-screen flex flex-col bg-background text-foreground`}>
         <ThemeProvider
           attribute="class"

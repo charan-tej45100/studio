@@ -13,7 +13,7 @@ export default function NotFound() {
         Oops! Page Not Found
       </p>
       <p className="mt-2 text-lg text-muted-foreground">
-        Under Development!!
+        Building It Up
       </p>
       <Button asChild size="lg" className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90">
         <Link href="/">
@@ -24,3 +24,4 @@ export default function NotFound() {
     </div>
   );
 }
+
