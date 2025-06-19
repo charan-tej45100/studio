@@ -31,7 +31,7 @@ export function HeroSection() {
       )}
       <div className="container relative z-10 mx-auto max-w-4xl px-4 text-center">
         <h1
-          className="font-headline text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl underline decoration-[#39FF14]"
+          className="font-headline text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl underline decoration-[#39FF14] animate-blink"
           style={{
             color: '#FFFFFF'
           }}
