@@ -9,8 +9,7 @@ const portfolioItems = [
   {
     title: 'Done my Best',
     category: 'Web Development',
-    imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHint: 'website interface',
+    imageUrl: 'https://cdn.prod.website-files.com/684d7e5c02db1c685f9f53ad/684d850de2810d8628cdf075_8a6b4e77-84af-42cd-847e-5f1998423ef2.avif',
     link: '#',
   },
   {
@@ -50,7 +49,7 @@ export function PortfolioSection() {
                   alt={item.title}
                   fill={true}
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  data-ai-hint={item.dataAiHint}
+                  data-ai-hint={(item as any).dataAiHint}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
