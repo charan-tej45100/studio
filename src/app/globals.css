@@ -7,6 +7,14 @@ body {
 }
 
 @layer base {
+  @font-face {
+    font-family: 'Sreda';
+    src: url('/fonts/Sreda-Regular.woff2') format('woff2'); /* Update path and format as needed */
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
