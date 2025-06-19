@@ -38,7 +38,7 @@ export function PortfolioSection() {
             Our Creative Showcase
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-            Take a glimpse at some of the stunning projects built using Charan UI Kit components.
+            Building
           </p>
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -76,4 +76,3 @@ export function PortfolioSection() {
     </section>
   );
 }
-
