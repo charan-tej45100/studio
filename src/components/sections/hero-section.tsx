@@ -33,8 +33,7 @@ export function HeroSection() {
         <h1 
           className="font-headline text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl" 
           style={{ 
-            color: '#FFFFFF', 
-            textShadow: '0 0 5px #FFFFFF, 0 0 10px #FFFFFF, 0 0 15px #FFFFFF, 0 0 20px #FFFFFF' 
+            color: '#FFFFFF'
           }}
         >
           Charan
