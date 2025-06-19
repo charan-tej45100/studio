@@ -1,13 +1,18 @@
 "use client";
 
-import Spline from '@splinetool/react-spline';
+import dynamic from 'next/dynamic';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, FileText } from 'lucide-react';
 import Link from 'next/link';
 
+const Spline = dynamic(() => import('@splinetool/react-spline'), {
+  ssr: false,
+  loading: () => <div className="absolute inset-0 w-full h-full bg-background/50 flex items-center justify-center"><p>Loading 3D scene...</p></div>,
+});
+
 export function HeroSection() {
   return (
-    <section className="relative py-20 md:py-32 bg-gradient-to-br from-background to-primary/10 overflow-hidden">
+    <section className="relative py-20 md:py-32 bg-gradient-to-br from-background to-primary/10 overflow-hidden h-[500px] md:h-[600px] lg:h-[700px]">
       <Spline
         scene="https://prod.spline.design/QLD-o6Ytqgf9Y2W2/scene.splinecode"
         className="absolute inset-0 w-full h-full"
