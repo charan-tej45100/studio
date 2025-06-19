@@ -35,7 +35,7 @@ export function PortfolioSection() {
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="font-headline text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Our <span style={{ color: '#39FF14' }}>Creative</span> Showcase
+            Our <span style={{ color: '#39FF14' }} className="underline decoration-white">Creative</span> Showcase
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
             Building
@@ -76,3 +76,4 @@ export function PortfolioSection() {
     </section>
   );
 }
+
