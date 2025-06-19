@@ -33,13 +33,13 @@ export function Navbar() {
           className="flex items-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-background"
           aria-label="Charan Home"
         >
-          <svg width="auto" height="24" viewBox="0 0 150 45" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="logo-title-charan">
+          <svg width="auto" height="24" viewBox="0 0 180 45" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="logo-title-charan">
             <title id="logo-title-charan">Charan Logo</title>
             <path d="M20.3753 0.719971L0.0419922 27.64V41.2H7.08074V30.16L23.4141 7.47997H24.0807L7.74736 30.16V41.2H14.7861V28.84L35.1194 1.91997V14.28L20.8753 33.4V41.2H27.9141V34L41.9141 15.48V0.719971H34.8753L20.3753 19.48L20.3753 0.719971Z" fill="#FCFCFC"></path>
             <text x="50" y="35"
                   font-family="Inter, sans-serif" font-size="30" font-weight="bold" fill="#FCFCFC"
                   letter-spacing="1" dominant-baseline="alphabetic" text-anchor="start">
-              HARAN
+              CHARAN
             </text>
           </svg>
         </Link>
@@ -72,7 +72,6 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-card shadow-lg">
           <nav className="flex flex-col space-y-4 p-4">
