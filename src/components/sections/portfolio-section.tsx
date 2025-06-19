@@ -14,7 +14,7 @@ const portfolioItems = [
     link: '#',
   },
   {
-    title: 'Mobile Banking App',
+    title: 'Working',
     category: 'Mobile App',
     imageUrl: 'https://placehold.co/600x400.png',
     dataAiHint: 'mobile app',
