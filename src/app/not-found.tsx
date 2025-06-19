@@ -13,7 +13,7 @@ export default function NotFound() {
         Oops! Page Not Found
       </p>
       <p className="mt-2 text-lg text-muted-foreground">
-        The page you are looking for might have been removed or is temporarily unavailable.
+        Under Development!!
       </p>
       <Button asChild size="lg" className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90">
         <Link href="/">
