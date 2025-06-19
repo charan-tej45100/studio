@@ -30,7 +30,7 @@ export function HeroSection() {
         <div className="absolute inset-0 flex h-full w-full items-center justify-center bg-background/50"><p>Loading 3D scene...</p></div>
       )}
       <div className="container relative z-10 mx-auto max-w-4xl px-4 text-center">
-        <h1 className="font-headline text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
+        <h1 className="font-headline text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl" style={{ color: '#55ffe1' }}>
           Charan
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground sm:text-xl md:text-2xl">
@@ -52,4 +52,3 @@ export function HeroSection() {
     </section>
   );
 }
-
