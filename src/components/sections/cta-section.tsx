@@ -38,7 +38,7 @@ export function CTASection() {
       <div className="container mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
         <Mail className="h-16 w-16 text-accent mx-auto mb-6" />
         <h2 className="font-headline text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-          Want to <span style={{ color: '#39FF14' }}>Contact</span> Us?
+          Want to <span style={{ color: '#39FF14' }} className="underline decoration-white">Contact</span> Us?
         </h2>
         <p className="mt-4 text-lg text-muted-foreground">
           Join our mailing list to receive updates on new components, features, and exclusive tips for building amazing user interfaces.
