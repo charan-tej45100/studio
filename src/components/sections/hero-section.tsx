@@ -34,7 +34,7 @@ export function HeroSection() {
           Charan
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground sm:text-xl md:text-2xl">
-          Exploring new edges of the <span className="font-sreda font-bold text-[#39FF14] animate-blink">WORLD</span>
+          Exploring new edges of the <span className="font-sreda font-bold text-[#39FF14] animate-blink underline decoration-white">WORLD</span>
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button asChild size="lg" className="w-full shadow-lg transform transition-transform hover:scale-105 sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90">
@@ -52,3 +52,4 @@ export function HeroSection() {
     </section>
   );
 }
+
