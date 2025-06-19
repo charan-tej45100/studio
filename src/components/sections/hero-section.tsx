@@ -38,7 +38,7 @@ export function HeroSection() {
         >
           Charan
           <span
-            className="absolute bottom-[0.12em] left-0 h-[0.06em] w-full animate-blink"
+            className="absolute bottom-[0.02em] left-0 h-[0.06em] w-full animate-blink"
             style={{ backgroundColor: '#39FF14' }}
             aria-hidden="true"
           ></span>
@@ -62,3 +62,4 @@ export function HeroSection() {
     </section>
   );
 }
+
