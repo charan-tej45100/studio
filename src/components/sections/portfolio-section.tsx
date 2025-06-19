@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
@@ -47,10 +48,10 @@ export function PortfolioSection() {
                 <Image
                   src={item.imageUrl}
                   alt={item.title}
-                  layout="fill"
-                  objectFit="cover"
-                  className="transition-transform duration-500 group-hover:scale-105"
+                  fill={true}
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                   data-ai-hint={item.dataAiHint}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
               </div>
