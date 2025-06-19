@@ -1,3 +1,4 @@
+
 "use client";
 
 import dynamic from 'next/dynamic';
@@ -22,7 +23,7 @@ export function HeroSection() {
     <section className="relative overflow-hidden bg-gradient-to-br from-background to-primary/10 py-20 md:py-32 h-[500px] md:h-[600px] lg:h-[700px]">
       {isClient ? (
         <Spline
-          scene="https://prod.spline.design/QLD-o6Ytqgf9Y2W2/scene.splinecode"
+          scene="https://prod.spline.design/fP0LH65i8bXQDQjZ/scene.splinecode"
           className="absolute inset-0 h-full w-full"
         />
       ) : (
