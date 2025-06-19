@@ -47,7 +47,7 @@ export function Navbar() {
         <div className="hidden md:flex items-center space-x-4">
           <ThemeToggleButton />
           <Button asChild variant="default" className="bg-accent text-accent-foreground hover:bg-accent/90">
-            <Link href="#contact">Get Started</Link>
+            <Link href="#contact">Durga maa</Link>
           </Button>
         </div>
 
@@ -75,7 +75,7 @@ export function Navbar() {
               </Link>
             ))}
             <Button asChild variant="default" className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
-              <Link href="#contact" onClick={() => setIsMenuOpen(false)}>Get Started</Link>
+              <Link href="#contact" onClick={() => setIsMenuOpen(false)}>Durga maa</Link>
             </Button>
           </nav>
         </div>
