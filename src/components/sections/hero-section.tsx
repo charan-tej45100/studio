@@ -4,33 +4,44 @@ import dynamic from 'next/dynamic';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, FileText } from 'lucide-react';
 import Link from 'next/link';
+import React, { useState, useEffect } from 'react';
 
 const Spline = dynamic(() => import('@splinetool/react-spline'), {
   ssr: false,
-  loading: () => <div className="absolute inset-0 w-full h-full bg-background/50 flex items-center justify-center"><p>Loading 3D scene...</p></div>,
+  loading: () => <div className="absolute inset-0 flex h-full w-full items-center justify-center bg-background/50"><p>Loading 3D scene...</p></div>,
 });
 
 export function HeroSection() {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
-    <section className="relative py-20 md:py-32 bg-gradient-to-br from-background to-primary/10 overflow-hidden h-[500px] md:h-[600px] lg:h-[700px]">
-      <Spline
-        scene="https://prod.spline.design/QLD-o6Ytqgf9Y2W2/scene.splinecode"
-        className="absolute inset-0 w-full h-full"
-      />
-      <div className="container mx-auto max-w-4xl px-4 text-center relative z-10">
+    <section className="relative overflow-hidden bg-gradient-to-br from-background to-primary/10 py-20 md:py-32 h-[500px] md:h-[600px] lg:h-[700px]">
+      {isClient ? (
+        <Spline
+          scene="https://prod.spline.design/QLD-o6Ytqgf9Y2W2/scene.splinecode"
+          className="absolute inset-0 h-full w-full"
+        />
+      ) : (
+        <div className="absolute inset-0 flex h-full w-full items-center justify-center bg-background/50"><p>Loading 3D scene...</p></div>
+      )}
+      <div className="container relative z-10 mx-auto max-w-4xl px-4 text-center">
         <h1 className="font-headline text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
           Charan
         </h1>
-        <p className="mt-6 max-w-2xl mx-auto text-lg text-muted-foreground sm:text-xl md:text-2xl">
+        <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground sm:text-xl md:text-2xl">
           Charan UI Kit provides a comprehensive suite of beautifully designed, highly customizable, and production-ready components for your Next.js applications.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Button asChild size="lg" className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform transition-transform hover:scale-105">
+          <Button asChild size="lg" className="w-full shadow-lg transform transition-transform hover:scale-105 sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90">
             <Link href="#features">
               Explore Components <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
-          <Button asChild variant="outline" size="lg" className="w-full sm:w-auto border-primary/50 text-primary-foreground hover:bg-primary/10 hover:text-accent shadow-lg transform transition-transform hover:scale-105">
+          <Button asChild variant="outline" size="lg" className="w-full shadow-lg transform transition-transform hover:scale-105 sm:w-auto border-primary/50 text-primary-foreground hover:bg-primary/10 hover:text-accent">
             <Link href="/docs">
               Read Docs <FileText className="ml-2 h-5 w-5" />
             </Link>
