@@ -31,12 +31,17 @@ export function HeroSection() {
       )}
       <div className="container relative z-10 mx-auto max-w-4xl px-4 text-center">
         <h1
-          className="font-headline text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl underline decoration-[#39FF14] animate-blink"
+          className="relative inline-block font-headline text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
           style={{
             color: '#FFFFFF'
           }}
         >
           Charan
+          <span
+            className="absolute bottom-[0.12em] left-0 h-[0.06em] w-full animate-blink"
+            style={{ backgroundColor: '#39FF14' }}
+            aria-hidden="true"
+          ></span>
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground sm:text-xl md:text-2xl">
           Exploring new edges of the <span className="font-sreda font-bold text-[#39FF14] underline decoration-white">WORLD</span>
@@ -57,4 +62,3 @@ export function HeroSection() {
     </section>
   );
 }
-
