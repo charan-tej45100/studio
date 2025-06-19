@@ -7,7 +7,7 @@ export function Footer() {
     <footer className="border-t border-border/50 bg-background">
       <div className="container mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-4 py-10 sm:flex-row sm:px-6 lg:px-8">
         <p className="text-sm text-muted-foreground">
-          &copy; {currentYear} <span style={{ color: '#39FF14' }}>Charan</span>. All rights reserved.
+          &copy; {currentYear} <span style={{ color: '#39FF14' }} className="underline decoration-white">Charan</span>. All rights reserved.
         </p>
         <div className="flex items-center space-x-4">
           <Link href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X">
