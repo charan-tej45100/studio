@@ -18,7 +18,7 @@ export function HeroSection() {
       </div>
       <div className="container mx-auto max-w-4xl px-4 text-center relative z-10">
         <h1 className="font-headline text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
-          Craft Stunning <span className="text-accent">Interfaces</span> Effortlessly
+          Charan
         </h1>
         <p className="mt-6 max-w-2xl mx-auto text-lg text-muted-foreground sm:text-xl md:text-2xl">
           Charan UI Kit provides a comprehensive suite of beautifully designed, highly customizable, and production-ready components for your Next.js applications.
