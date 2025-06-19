@@ -28,7 +28,7 @@ export function Navbar() {
   return (
     <header className={`sticky top-0 z-50 w-full transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-lg' : 'bg-transparent'}`}>
       <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="text-2xl font-bold text-primary-foreground transition-colors hover:text-accent">
+        <Link href="/" className="text-2xl font-bold transition-colors" style={{ color: '#39FF14' }}>
           Charan
         </Link>
 
