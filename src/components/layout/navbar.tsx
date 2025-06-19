@@ -28,8 +28,14 @@ export function Navbar() {
   return (
     <header className={`sticky top-0 z-50 w-full transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-lg' : 'bg-transparent'}`}>
       <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="text-2xl font-bold transition-colors underline decoration-white" style={{ color: '#39FF14' }}>
-          Charan
+        <Link 
+          href="/" 
+          className="flex items-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-background" 
+          aria-label="Charan Home"
+        >
+          <svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <path fill="#39FF14" d="M80 20 C50 20 30 35 30 50 S 50 80 80 80 L 80 65 C58 65 45 58 45 50 S 58 35 80 35 L 80 20 Z" />
+          </svg>
         </Link>
 
         <nav className="hidden md:flex items-center space-x-6">
