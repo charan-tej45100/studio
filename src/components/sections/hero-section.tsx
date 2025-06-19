@@ -34,7 +34,7 @@ export function HeroSection() {
           Charan
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground sm:text-xl md:text-2xl">
-          Charan UI Kit provides a comprehensive suite of beautifully designed, highly customizable, and production-ready components for your Next.js applications.
+          Exploring new edges of the WORLD
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button asChild size="lg" className="w-full shadow-lg transform transition-transform hover:scale-105 sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90">
