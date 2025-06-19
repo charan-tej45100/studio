@@ -39,7 +39,7 @@ export function HeroSection() {
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button asChild size="lg" className="w-full shadow-lg transform transition-transform hover:scale-105 sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90">
             <Link href="#features">
-              Explore Components <ArrowRight className="ml-2 h-5 w-5" />
+              Explore... <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
           <Button asChild variant="outline" size="lg" className="w-full shadow-lg transform transition-transform hover:scale-105 sm:w-auto border-primary/50 text-primary-foreground hover:bg-primary/10 hover:text-accent">
@@ -52,3 +52,4 @@ export function HeroSection() {
     </section>
   );
 }
+
