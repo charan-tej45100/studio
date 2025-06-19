@@ -1,4 +1,4 @@
-import { Github, Linkedin, Twitter } from 'lucide-react';
+import { Github, Linkedin } from 'lucide-react';
 import Link from 'next/link';
 
 export function Footer() {
@@ -10,8 +10,10 @@ export function Footer() {
           &copy; {currentYear} Charan. All rights reserved.
         </p>
         <div className="flex items-center space-x-4">
-          <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-            <Twitter className="h-5 w-5 text-muted-foreground transition-colors hover:text-accent-foreground" />
+          <Link href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X">
+            <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 text-muted-foreground transition-colors hover:text-accent-foreground">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+            </svg>
           </Link>
           <Link href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
             <Github className="h-5 w-5 text-muted-foreground transition-colors hover:text-accent-foreground" />
