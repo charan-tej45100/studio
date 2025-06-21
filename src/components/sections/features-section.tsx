@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Layers, Palette, Smartphone, Zap } from 'lucide-react';
 import Link from 'next/link';
@@ -38,7 +39,7 @@ export function FeaturesSection() {
             Everything You Need in One Place
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-            New <span style={{ color: '#39FF14' }}>Project</span>
+            New <span style={{ color: '#39FF14' }} className="underline decoration-white">Project</span>
           </p>
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
