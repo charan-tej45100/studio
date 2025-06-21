@@ -1,3 +1,4 @@
+
 import type {Config} from 'tailwindcss';
 
 export default {
@@ -111,8 +112,8 @@ export default {
           '80%': { transform: 'translate(-10vw, -25vh) rotate(-20deg)' },
         },
         'color-change': {
-          '0%, 100%': { color: '#FF143C' },
-          '50%': { color: '#39FF14' },
+          '0%, 49.99%': { color: '#FF143C' },
+          '50%, 100%': { color: '#39FF14' },
         },
       },
       animation: {
@@ -121,7 +122,7 @@ export default {
         blink: 'blink 0.75s ease-in-out infinite',
         'bounce-slow': 'bounce-slow 2s infinite',
         'move-around': 'move-around 20s ease-in-out infinite alternate',
-        'color-change': 'color-change 1s steps(1, end) infinite alternate',
+        'color-change': 'color-change 2s linear infinite alternate',
       },
     },
   },

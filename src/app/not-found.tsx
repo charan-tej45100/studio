@@ -31,7 +31,7 @@ export default function NotFound() {
     <div className="relative h-screen w-full overflow-hidden bg-background">
       {elements.map((element, i) => {
         const moveAroundAnimation = `move-around ${element.animationDuration} ease-in-out ${element.animationDelay} infinite alternate`;
-        const colorChangeAnimation = `color-change 1s steps(1, end) infinite alternate`;
+        const colorChangeAnimation = `color-change 2s linear infinite alternate`;
         
         const animation = element.isColorChanging
           ? `${moveAroundAnimation}, ${colorChangeAnimation}`
