@@ -7,8 +7,11 @@ const CustomCursor = () => {
   const [position, setPosition] = useState({ x: -100, y: -100 });
   const [isPointer, setIsPointer] = useState(false);
   const [isDown, setIsDown] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+
     const handleMouseMove = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
       const target = e.target as HTMLElement;
@@ -32,6 +35,10 @@ const CustomCursor = () => {
       document.removeEventListener('mouseup', handleMouseUp);
     };
   }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   const scale = isDown ? 0.7 : isPointer ? 1.5 : 1;
 
