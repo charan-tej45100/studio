@@ -3,7 +3,7 @@ export default function NotFound() {
   const texts = Array.from({ length: 24 });
 
   return (
-    <div className="flex min-h-screen flex-wrap gap-16 bg-background p-8">
+    <div className="flex min-h-screen flex-wrap items-center justify-center gap-16 bg-background p-8">
       {texts.map((_, i) => (
         <h1
           key={i}
