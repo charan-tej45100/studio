@@ -5,18 +5,35 @@ import React, { useState, useEffect } from 'react';
 
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: -100, y: -100 });
+  const [isPointer, setIsPointer] = useState(false);
+  const [isDown, setIsDown] = useState(false);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
+      const target = e.target as HTMLElement;
+      if (target) {
+        setIsPointer(
+          window.getComputedStyle(target).getPropertyValue('cursor') === 'pointer'
+        );
+      }
     };
 
+    const handleMouseDown = () => setIsDown(true);
+    const handleMouseUp = () => setIsDown(false);
+
     document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mousedown', handleMouseDown);
+    document.addEventListener('mouseup', handleMouseUp);
 
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mousedown', handleMouseDown);
+      document.removeEventListener('mouseup', handleMouseUp);
     };
   }, []);
+
+  const scale = isDown ? 0.7 : isPointer ? 1.5 : 1;
 
   return (
     <div
@@ -24,8 +41,8 @@ const CustomCursor = () => {
       style={{
         backgroundColor: '#FFD700',
         boxShadow: '0 0 15px #FFD700, 0 0 25px #FFD700',
-        transform: `translate(${position.x}px, ${position.y}px) translate(-50%, -50%)`,
-        transition: 'transform 120ms ease-out',
+        transform: `translate(${position.x}px, ${position.y}px) translate(-50%, -50%) scale(${scale})`,
+        transition: 'transform 0.1s ease-out',
       }}
     />
   );
