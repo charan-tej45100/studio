@@ -1,6 +1,6 @@
 
 export default function NotFound() {
-  const texts = Array.from({ length: 12 });
+  const texts = Array.from({ length: 24 });
 
   return (
     <div className="flex min-h-screen flex-wrap items-center justify-center gap-16 overflow-hidden bg-background p-8">
