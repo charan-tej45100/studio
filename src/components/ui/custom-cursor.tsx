@@ -20,9 +20,9 @@ const CustomCursor = () => {
 
   return (
     <div
-      className="pointer-events-none fixed left-0 top-0 z-[9999] h-8 w-8 rounded-full border-2"
+      className="pointer-events-none fixed left-0 top-0 z-[9999] h-8 w-8 rounded-full"
       style={{
-        borderColor: '#FFD700',
+        backgroundColor: '#FFD700',
         boxShadow: '0 0 15px #FFD700, 0 0 25px #FFD700',
         transform: `translate(${position.x}px, ${position.y}px) translate(-50%, -50%)`,
         transition: 'transform 120ms ease-out',
