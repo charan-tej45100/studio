@@ -38,7 +38,7 @@ export function FeaturesSection() {
             Everything You Need in One Place
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-            New Project
+            New <span style={{ color: '#39FF14' }}>Project</span>
           </p>
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
