@@ -38,7 +38,7 @@ export function FeaturesSection() {
             Everything You Need in One Place
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-            Discover the powerful features that make Charan UI Kit the perfect choice for your next project.
+            New Project
           </p>
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
