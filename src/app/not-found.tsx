@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 const NUM_ELEMENTS = 7;
 
 export default function NotFound() {
-  const [elements, setElements] = useState<{ top: string; left: string; animationDuration: string; animationDelay: string }[]>([]);
+  const [elements, setElements] = useState<{ top: string; left: string; animationDuration: string; animationDelay: string; }[]>([]);
 
   useEffect(() => {
     // This code runs only on the client, after the component has mounted.
@@ -24,9 +24,11 @@ export default function NotFound() {
       {elements.map((style, i) => (
         <h1
           key={i}
-          className="animate-move-around absolute text-8xl font-extrabold tracking-tight opacity-70"
+          className={`animate-move-around absolute text-8xl font-extrabold tracking-tight opacity-70 ${
+            i % 2 === 0 ? 'animate-color-change' : ''
+          }`}
           style={{
-            color: '#FF143C',
+            color: i % 2 !== 0 ? '#FF143C' : undefined,
             ...style,
           }}
         >

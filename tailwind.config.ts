@@ -110,6 +110,10 @@ export default {
           '60%': { transform: 'translate(20vw, 10vh) rotate(15deg)' },
           '80%': { transform: 'translate(-10vw, -25vh) rotate(-20deg)' },
         },
+        'color-change': {
+          '0%, 100%': { color: '#FF143C' },
+          '50%': { color: '#39FF14' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -117,6 +121,7 @@ export default {
         blink: 'blink 0.75s ease-in-out infinite',
         'bounce-slow': 'bounce-slow 2s infinite',
         'move-around': 'move-around 20s ease-in-out infinite alternate',
+        'color-change': 'color-change 10s ease-in-out infinite alternate',
       },
     },
   },
