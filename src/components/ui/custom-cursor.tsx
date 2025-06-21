@@ -20,7 +20,7 @@ const CustomCursor = () => {
 
   return (
     <div
-      className="pointer-events-none fixed left-0 top-0 z-[9999] h-8 w-8 rounded-full"
+      className="pointer-events-none fixed left-0 top-0 z-[9999] h-4 w-4 rounded-full"
       style={{
         backgroundColor: '#FFD700',
         boxShadow: '0 0 15px #FFD700, 0 0 25px #FFD700',
