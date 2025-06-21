@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, FileText } from 'lucide-react';
 import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
 
 const Spline = dynamic(() => import('@splinetool/react-spline'), {
   ssr: false,
@@ -13,22 +12,12 @@ const Spline = dynamic(() => import('@splinetool/react-spline'), {
 });
 
 export function HeroSection() {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-background to-primary/10 py-20 md:py-32 h-[500px] md:h-[600px] lg:h-[700px]">
-      {isClient ? (
-        <Spline
-          scene="https://prod.spline.design/fP0LH65i8bXQDQjZ/scene.splinecode"
-          className="absolute inset-0 h-full w-full"
-        />
-      ) : (
-        <div className="absolute inset-0 flex h-full w-full items-center justify-center bg-background/50"><p>Loading 3D scene...</p></div>
-      )}
+      <Spline
+        scene="https://prod.spline.design/fP0LH65i8bXQDQjZ/scene.splinecode"
+        className="absolute inset-0 h-full w-full"
+      />
       <div className="container relative z-10 mx-auto max-w-4xl px-4 text-center">
         <h1
           className="relative inline-block font-headline text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
@@ -62,4 +51,3 @@ export function HeroSection() {
     </section>
   );
 }
-
