@@ -121,6 +121,8 @@ export default {
         'accordion-up': 'accordion-up 0.2s ease-out',
         blink: 'blink 0.75s ease-in-out infinite',
         'bounce-slow': 'bounce-slow 2s infinite',
+        'move-around-static': 'move-around 25s ease-in-out infinite alternate',
+        'move-around-colorful': 'move-around 25s ease-in-out infinite alternate, color-change 1s linear infinite',
       },
     },
   },
