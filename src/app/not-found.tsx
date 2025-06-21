@@ -28,23 +28,31 @@ export default function NotFound() {
 
   return (
     <div className="relative h-screen w-full overflow-hidden bg-background">
-      {elements.map((element, i) => (
-        <h1
-          key={i}
-          className={`animate-move-around absolute text-8xl font-extrabold tracking-tight opacity-70 ${
-            element.isColorChanging ? 'animate-color-change' : ''
-          }`}
-          style={{
-            color: !element.isColorChanging ? '#FF143C' : undefined,
-            top: element.top,
-            left: element.left,
-            animationDuration: element.animationDuration,
-            animationDelay: element.animationDelay,
-          }}
-        >
-          404
-        </h1>
-      ))}
+      {elements.map((element, i) => {
+        const moveAroundAnimation = `move-around ${element.animationDuration} ease-in-out ${element.animationDelay} infinite alternate`;
+        const colorChangeAnimation = `color-change 10s ease-in-out infinite alternate`;
+        
+        const animation = element.isColorChanging
+          ? `${moveAroundAnimation}, ${colorChangeAnimation}`
+          : moveAroundAnimation;
+          
+        const style: React.CSSProperties = {
+          top: element.top,
+          left: element.left,
+          animation: animation,
+          color: !element.isColorChanging ? '#FF143C' : undefined,
+        };
+
+        return (
+          <h1
+            key={i}
+            className="absolute text-8xl font-extrabold tracking-tight opacity-70"
+            style={style}
+          >
+            404
+          </h1>
+        );
+      })}
     </div>
   );
 }
