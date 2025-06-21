@@ -15,10 +15,6 @@ export default function NotFound() {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    // This code runs only on the client, after the component has mounted.
-    // This avoids hydration mismatch errors by ensuring the random values
-    // are only generated and rendered on the client.
-    setIsClient(true);
     const newElements = Array.from({ length: NUM_ELEMENTS }).map(() => ({
       top: `${Math.random() * 80 + 10}%`,
       left: `${Math.random() * 80 + 10}%`,
@@ -26,11 +22,16 @@ export default function NotFound() {
       isColorChanging: Math.random() > 0.5,
     }));
     setElements(newElements);
+    setIsClient(true);
   }, []);
+
+  if (!isClient) {
+    return null;
+  }
 
   return (
     <div className="relative h-screen w-full overflow-hidden bg-background">
-      {isClient && elements.map((element, i) => {
+      {elements.map((element, i) => {
         const animationClass = element.isColorChanging
           ? 'animate-move-around-colorful'
           : 'animate-move-around-static';
