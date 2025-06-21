@@ -13,6 +13,7 @@ import {
   type Toast as ToastType,
   type ToasterToast 
 } from "@/hooks/use-toast";
+import CustomCursor from "./ui/custom-cursor";
 
 function ToastProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = React.useReducer(reducer, {
@@ -97,6 +98,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
             disableTransitionOnChange
         >
             <ToastProvider>
+                <CustomCursor />
                 {children}
                 <Toaster />
             </ToastProvider>
