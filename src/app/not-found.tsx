@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useEffect } from 'react';
@@ -30,7 +31,7 @@ export default function NotFound() {
     <div className="relative h-screen w-full overflow-hidden bg-background">
       {elements.map((element, i) => {
         const moveAroundAnimation = `move-around ${element.animationDuration} ease-in-out ${element.animationDelay} infinite alternate`;
-        const colorChangeAnimation = `color-change 10s ease-in-out infinite alternate`;
+        const colorChangeAnimation = `color-change 1s steps(1, end) infinite alternate`;
         
         const animation = element.isColorChanging
           ? `${moveAroundAnimation}, ${colorChangeAnimation}`
