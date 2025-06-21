@@ -44,11 +44,12 @@ const CustomCursor = () => {
 
   return (
     <div
-      className="pointer-events-none fixed left-0 top-0 z-[9999] h-2 w-2 rounded-full"
+      className="pointer-events-none fixed left-0 top-0 z-[9999] h-4 w-4 rounded-full"
       style={{
         backgroundColor: '#FFD700',
         boxShadow: '0 0 15px #FFD700, 0 0 25px #FFD700',
         transform: `translate(${position.x}px, ${position.y}px) translate(-50%, -50%) scale(${scale})`,
+        transition: 'transform 0.1s ease-out',
       }}
     />
   );
