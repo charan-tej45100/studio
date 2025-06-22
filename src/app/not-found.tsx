@@ -55,6 +55,7 @@ export default function NotFound() {
   
   const elementsRef = useRef<BouncingElement[]>(elements);
   const [isClient, setIsClient] = useState(false);
+  const [isGlowing, setIsGlowing] = useState(false);
 
   useEffect(() => {
     // Run only on client
@@ -72,6 +73,16 @@ export default function NotFound() {
       el.blinkOffset = Math.random() * 1000; // Add random blink offset
     });
   }, []);
+
+  useEffect(() => {
+    if (!isClient) return;
+
+    const intervalId = setInterval(() => {
+      setIsGlowing((prev) => !prev);
+    }, 1500); // Pulse every 1.5 seconds
+
+    return () => clearInterval(intervalId);
+  }, [isClient]);
 
   useEffect(() => {
     if (!isClient) return;
@@ -159,7 +170,10 @@ export default function NotFound() {
           className="text-8xl font-extrabold tracking-tight flex flex-col items-center"
           style={{
             color: '#FF143C',
-            textShadow: `0 0 10px #FF143C, 0 0 20px #FF143C`,
+            textShadow: isGlowing
+              ? '0 0 10px #FF143C, 0 0 20px #FF143C, 0 0 40px #FF143C, 0 0 60px #FFD700'
+              : '0 0 10px #FF143C, 0 0 20px #FF143C',
+            transition: 'text-shadow 0.5s ease-in-out',
           }}
         >
           404
