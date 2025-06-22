@@ -184,7 +184,7 @@ export default function NotFound() {
           {el.text}
           {el.id === 0 && (
             <p
-              className="glitch mt-4 text-4xl font-bold"
+              className="glitch text-4xl font-bold"
               data-text="Page not Found"
               style={{
                 textShadow: '0 0 5px white, 0 0 10px white'
