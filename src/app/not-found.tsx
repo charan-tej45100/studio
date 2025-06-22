@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect, useRef, useMemo } from 'react';
@@ -28,7 +27,7 @@ interface BouncingElement {
 export default function NotFound() {
   const containerRef = useRef<HTMLDivElement>(null);
   
-  // Using useMemo to create the initial elements only once, preventing re-creation on re-renders
+  // Use useMemo with static values to prevent SSR issues.
   const elements = useMemo<BouncingElement[]>(() => {
     const initialElements: BouncingElement[] = [];
     
@@ -36,25 +35,25 @@ export default function NotFound() {
     initialElements.push({
       id: 0,
       text: '404',
-      x: Math.random() * 150 + 50,
-      y: Math.random() * 150 + 50,
-      vx: (Math.random() > 0.5 ? 1 : -1) * 1.5,
-      vy: (Math.random() > 0.5 ? 1 : -1) * 1.5,
-      color: colors[Math.floor(Math.random() * colors.length)],
+      x: 150,
+      y: 150,
+      vx: 1.5,
+      vy: 1.5,
+      color: colors[0],
       className: 'absolute text-8xl font-extrabold tracking-tight',
       ref: React.createRef<HTMLHeadingElement>(),
     });
 
-    // 20 small 404s
-    for (let i = 1; i <= 20; i++) {
+    // 10 small 404s
+    for (let i = 1; i <= 10; i++) {
       initialElements.push({
         id: i,
         text: '404',
-        x: Math.random() * 200 + 50,
-        y: Math.random() * 200 + 50,
-        vx: (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 1 + 0.5),
-        vy: (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 1 + 0.5),
-        color: colors[Math.floor(Math.random() * colors.length)],
+        x: 50 + i * 20,
+        y: 50 + i * 20,
+        vx: 1,
+        vy: 1,
+        color: colors[i % colors.length],
         className: 'absolute text-2xl font-bold tracking-tight',
         ref: React.createRef<HTMLHeadingElement>(),
       });
@@ -62,15 +61,23 @@ export default function NotFound() {
     return initialElements;
   }, []);
   
-  // A single ref to hold the state of all elements to avoid re-rendering inside the animation loop
   const elementsRef = useRef<BouncingElement[]>(elements);
-  
-  const [, setTick] = useState(0);
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    // This ensures the component only renders its content on the client
+    // Run only on client
     setIsClient(true);
+    
+    // Randomize positions and velocities on the client to avoid hydration mismatch
+    elementsRef.current.forEach(el => {
+      const container = containerRef.current;
+      if (container) {
+          el.x = Math.random() * (container.clientWidth - 150);
+          el.y = Math.random() * (container.clientHeight - 150);
+      }
+      el.vx = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 1 + 0.5);
+      el.vy = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 1 + 0.5);
+    });
   }, []);
 
   useEffect(() => {
@@ -86,48 +93,59 @@ export default function NotFound() {
       const container = containerRef.current.getBoundingClientRect();
       
       elementsRef.current.forEach(el => {
-        // Get the dimensions of the text element for accurate collision detection
-        const text = el.ref.current?.getBoundingClientRect();
-        if (!text || text.width === 0) return; // Skip if not rendered yet
+        const textEl = el.ref.current;
+        if (!textEl) return;
+        
+        const textRect = textEl.getBoundingClientRect();
+        if (textRect.width === 0) return;
 
         let wallHit = false;
 
-        // Update position
         el.x += el.vx;
         el.y += el.vy;
 
-        // Check for wall collisions
-        if (el.x <= 0 || el.x + text.width >= container.width) {
+        if (el.x <= 0) {
+          el.x = 0;
+          el.vx = -el.vx;
+          wallHit = true;
+        } else if (el.x + textRect.width >= container.width) {
+          el.x = container.width - textRect.width;
           el.vx = -el.vx;
           wallHit = true;
         }
-        if (el.y <= 0 || el.y + text.height >= container.height) {
+
+        if (el.y <= 0) {
+          el.y = 0;
+          el.vy = -el.vy;
+          wallHit = true;
+        } else if (el.y + textRect.height >= container.height) {
+          el.y = container.height - textRect.height;
           el.vy = -el.vy;
           wallHit = true;
         }
 
-        // Change color on bounce
         if (wallHit) {
           const currentIndex = colors.indexOf(el.color);
           const nextIndex = (currentIndex + 1) % colors.length;
           el.color = colors[nextIndex];
         }
+
+        // Directly manipulate the DOM for performance
+        textEl.style.transform = `translate(${el.x}px, ${el.y}px)`;
+        textEl.style.color = el.color;
+        textEl.style.textShadow = `0 0 10px ${el.color}, 0 0 20px ${el.color}`;
       });
 
-      // Trigger a re-render to show the updated positions and colors
-      setTick(tick => tick + 1);
       animationFrameId = requestAnimationFrame(move);
     };
 
     animationFrameId = requestAnimationFrame(move);
 
-    // Clean up animation on component unmount
     return () => {
       cancelAnimationFrame(animationFrameId);
     };
   }, [isClient]);
 
-  // Return null on server and initial client render to avoid hydration errors
   if (!isClient) {
     return null;
   }
@@ -143,7 +161,7 @@ export default function NotFound() {
             transform: `translate(${el.x}px, ${el.y}px)`,
             color: el.color,
             textShadow: `0 0 10px ${el.color}, 0 0 20px ${el.color}`,
-            willChange: 'transform',
+            willChange: 'transform, color, text-shadow',
           }}
         >
           {el.text}
