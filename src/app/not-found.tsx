@@ -132,7 +132,7 @@ export default function NotFound() {
           wallHit = true;
         }
 
-        if (wallHit) {
+        if (wallHit && el.id !== 0) {
           const currentIndex = colors.indexOf(el.color);
           const nextIndex = (currentIndex + 1) % colors.length;
           el.color = colors[nextIndex];
