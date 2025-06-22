@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect, useRef, useMemo } from 'react';
@@ -23,6 +22,7 @@ interface BouncingElement {
   color: string;
   className: string;
   isBlinking: boolean;
+  blinkOffset: number;
   ref: React.RefObject<HTMLHeadingElement>;
 }
 
@@ -44,6 +44,7 @@ export default function NotFound() {
       color: colors[0],
       className: 'absolute text-8xl font-extrabold tracking-tight',
       isBlinking: true,
+      blinkOffset: 0,
       ref: React.createRef<HTMLHeadingElement>(),
     });
 
@@ -59,6 +60,7 @@ export default function NotFound() {
         color: colors[i % colors.length],
         className: 'absolute text-2xl font-bold tracking-tight',
         isBlinking: true,
+        blinkOffset: 0,
         ref: React.createRef<HTMLHeadingElement>(),
       });
     }
@@ -72,7 +74,7 @@ export default function NotFound() {
     // Run only on client
     setIsClient(true);
     
-    // Randomize positions and velocities on the client to avoid hydration mismatch
+    // Randomize properties on the client to avoid hydration mismatch
     elementsRef.current.forEach(el => {
       const container = containerRef.current;
       if (container) {
@@ -81,6 +83,7 @@ export default function NotFound() {
       }
       el.vx = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 1 + 0.5);
       el.vy = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 1 + 0.5);
+      el.blinkOffset = Math.random() * 1000; // Add random blink offset
     });
   }, []);
 
@@ -136,7 +139,8 @@ export default function NotFound() {
 
         let displayColor = el.color;
         if (el.isBlinking) {
-          const shouldBeWhite = Math.floor(Date.now() / 300) % 2 === 0; // Blink every 300ms
+          // Use the offset to make blinking appear at random intervals
+          const shouldBeWhite = Math.floor((Date.now() + el.blinkOffset) / 300) % 2 === 0;
           if (shouldBeWhite) {
             displayColor = '#FFFFFF';
           }
