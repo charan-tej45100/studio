@@ -2,6 +2,9 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useMemo } from 'react';
+import Link from 'next/link';
+import { Home } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 // A list of colors to cycle through on each bounce
 const colors = [
@@ -165,7 +168,7 @@ export default function NotFound() {
 
   return (
     <div ref={containerRef} className="relative h-screen w-full overflow-hidden bg-black">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style={{ zIndex: 1 }}>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center" style={{ zIndex: 1 }}>
         <h1
           className="text-8xl font-extrabold tracking-tight flex flex-col items-center"
           style={{
@@ -187,6 +190,12 @@ export default function NotFound() {
             Page not Found
           </p>
         </h1>
+        <Button asChild variant="outline" className="mt-8 bg-transparent border-white/20 text-white/80 hover:bg-white/10 hover:text-white transition-colors">
+            <Link href="/">
+              <Home className="mr-2 h-4 w-4" />
+              Go to Homepage
+            </Link>
+        </Button>
       </div>
       
       {elementsRef.current.map(el => (
