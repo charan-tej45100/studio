@@ -42,8 +42,8 @@ export default function NotFound() {
       y: 150,
       vx: 1.5,
       vy: 1.5,
-      color: colors[0],
-      className: 'absolute text-8xl font-extrabold tracking-tight',
+      color: '#FF143C', // Red
+      className: 'absolute text-8xl font-extrabold tracking-tight flex flex-col items-center',
       isBlinking: false,
       blinkOffset: 0,
       ref: React.createRef<HTMLHeadingElement>(),
@@ -79,8 +79,8 @@ export default function NotFound() {
     elementsRef.current.forEach(el => {
       const container = containerRef.current;
       if (container) {
-          el.x = Math.random() * (container.clientWidth - 150);
-          el.y = Math.random() * (container.clientHeight - 150);
+          el.x = Math.random() * (container.clientWidth - 250);
+          el.y = Math.random() * (container.clientHeight - 250);
       }
       el.vx = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 1 + 0.5);
       el.vy = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 1 + 0.5);
@@ -182,6 +182,17 @@ export default function NotFound() {
           }}
         >
           {el.text}
+          {el.id === 0 && (
+            <p
+              className="glitch mt-4 text-4xl font-bold"
+              data-text="Page not Found"
+              style={{
+                textShadow: '0 0 5px white, 0 0 10px white'
+              }}
+            >
+              Page not Found
+            </p>
+          )}
         </h1>
       ))}
     </div>
