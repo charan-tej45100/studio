@@ -179,12 +179,13 @@ export default function NotFound() {
             color: el.color,
             textShadow: `0 0 10px ${el.color}, 0 0 20px ${el.color}`,
             willChange: 'transform, color, text-shadow',
+            zIndex: el.id === 0 ? 1 : 'auto',
           }}
         >
           {el.text}
           {el.id === 0 && (
             <p
-              className="glitch text-4xl font-bold"
+              className="glitch text-4xl font-bold mt-[-10px]"
               data-text="Page not Found"
               style={{
                 textShadow: '0 0 5px white, 0 0 10px white'
