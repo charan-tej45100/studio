@@ -7,7 +7,7 @@ const features = [
   {
     icon: <Layers className="h-10 w-10 text-accent mb-4" />,
     title: 'Rich Component Library',
-    description: 'Access a wide variety of pre-built components, from buttons to complex data tables, all designed with accessibility and responsiveness in mind.',
+    description: 'Good looking Icons and Components.',
     link: '/components',
   },
   {
