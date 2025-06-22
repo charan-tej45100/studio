@@ -44,7 +44,7 @@ export default function NotFound() {
       vy: 1.5,
       color: colors[0],
       className: 'absolute text-8xl font-extrabold tracking-tight',
-      isBlinking: true,
+      isBlinking: false,
       blinkOffset: 0,
       ref: React.createRef<HTMLHeadingElement>(),
     });
