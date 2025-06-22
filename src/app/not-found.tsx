@@ -49,8 +49,8 @@ export default function NotFound() {
       ref: React.createRef<HTMLHeadingElement>(),
     });
 
-    // 16 small 404s
-    for (let i = 1; i <= 16; i++) {
+    // 11 small 404s
+    for (let i = 1; i <= 11; i++) {
       initialElements.push({
         id: i,
         text: '404',
