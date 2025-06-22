@@ -168,7 +168,7 @@ export default function NotFound() {
 
   return (
     <div ref={containerRef} className="relative h-screen w-full overflow-hidden bg-black">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center" style={{ zIndex: 1 }}>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center" style={{ zIndex: 10 }}>
         <h1
           className="text-8xl font-extrabold tracking-tight flex flex-col items-center"
           style={{
