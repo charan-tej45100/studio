@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 
 // A list of colors to cycle through on each bounce
 const colors = [
@@ -12,25 +12,64 @@ const colors = [
   '#9400D3', // DarkViolet
 ];
 
+interface BouncingElement {
+  id: number;
+  text: string;
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  color: string;
+  className: string;
+  ref: React.RefObject<HTMLHeadingElement>;
+}
+
 export default function NotFound() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLHeadingElement>(null);
   
-  // Use refs for animation values to avoid re-triggering the animation loop effect
-  const positionRef = useRef({ x: 50, y: 50 });
-  const velocityRef = useRef({ vx: 2, vy: 2 });
-  const colorRef = useRef(colors[0]);
+  // Using useMemo to create the initial elements only once, preventing re-creation on re-renders
+  const elements = useMemo<BouncingElement[]>(() => {
+    const initialElements: BouncingElement[] = [];
+    
+    // Main 404
+    initialElements.push({
+      id: 0,
+      text: '404',
+      x: Math.random() * 150 + 50,
+      y: Math.random() * 150 + 50,
+      vx: (Math.random() > 0.5 ? 1 : -1) * 1.5,
+      vy: (Math.random() > 0.5 ? 1 : -1) * 1.5,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      className: 'absolute text-8xl font-extrabold tracking-tight',
+      ref: React.createRef<HTMLHeadingElement>(),
+    });
 
-  // A dummy state to trigger re-renders on each animation frame
+    // 10 small 404s
+    for (let i = 1; i <= 10; i++) {
+      initialElements.push({
+        id: i,
+        text: '404',
+        x: Math.random() * 200 + 50,
+        y: Math.random() * 200 + 50,
+        vx: (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 1 + 0.5),
+        vy: (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 1 + 0.5),
+        color: colors[Math.floor(Math.random() * colors.length)],
+        className: 'absolute text-2xl font-bold tracking-tight',
+        ref: React.createRef<HTMLHeadingElement>(),
+      });
+    }
+    return initialElements;
+  }, []);
+  
+  // A single ref to hold the state of all elements to avoid re-rendering inside the animation loop
+  const elementsRef = useRef<BouncingElement[]>(elements);
+  
   const [, setTick] = useState(0);
   const [isClient, setIsClient] = useState(false);
 
-  // Set isClient to true and randomize starting values only on the client
   useEffect(() => {
+    // This ensures the component only renders its content on the client
     setIsClient(true);
-    positionRef.current = { x: Math.random() * 150 + 50, y: Math.random() * 150 + 50 };
-    velocityRef.current = { vx: (Math.random() > 0.5 ? 1 : -1) * 2, vy: (Math.random() > 0.5 ? 1 : -1) * 2 };
-    colorRef.current = colors[Math.floor(Math.random() * colors.length)];
   }, []);
 
   useEffect(() => {
@@ -39,74 +78,76 @@ export default function NotFound() {
     let animationFrameId: number;
 
     const move = () => {
-      if (!containerRef.current || !textRef.current) {
+      if (!containerRef.current) {
         animationFrameId = requestAnimationFrame(move);
         return;
       }
-
       const container = containerRef.current.getBoundingClientRect();
-      const text = textRef.current.getBoundingClientRect();
+      
+      elementsRef.current.forEach(el => {
+        // Get the dimensions of the text element for accurate collision detection
+        const text = el.ref.current?.getBoundingClientRect();
+        if (!text || text.width === 0) return; // Skip if not rendered yet
 
-      let { x, y } = positionRef.current;
-      let { vx, vy } = velocityRef.current;
-      let wallHit = false;
+        let wallHit = false;
 
-      x += vx;
-      y += vy;
+        // Update position
+        el.x += el.vx;
+        el.y += el.vy;
 
-      // Check for wall collisions and reverse velocity
-      if (x <= 0 || x + text.width >= container.width) {
-        vx = -vx;
-        wallHit = true;
-      }
-      if (y <= 0 || y + text.height >= container.height) {
-        vy = -vy;
-        wallHit = true;
-      }
+        // Check for wall collisions
+        if (el.x <= 0 || el.x + text.width >= container.width) {
+          el.vx = -el.vx;
+          wallHit = true;
+        }
+        if (el.y <= 0 || el.y + text.height >= container.height) {
+          el.vy = -el.vy;
+          wallHit = true;
+        }
 
-      // Change color on bounce
-      if (wallHit) {
-        const currentIndex = colors.indexOf(colorRef.current);
-        const nextIndex = (currentIndex + 1) % colors.length;
-        colorRef.current = colors[nextIndex];
-      }
+        // Change color on bounce
+        if (wallHit) {
+          const currentIndex = colors.indexOf(el.color);
+          const nextIndex = (currentIndex + 1) % colors.length;
+          el.color = colors[nextIndex];
+        }
+      });
 
-      positionRef.current = { x, y };
-      velocityRef.current = { vx, vy };
-
-      // Trigger a re-render to show the updated position and color
+      // Trigger a re-render to show the updated positions and colors
       setTick(tick => tick + 1);
-
       animationFrameId = requestAnimationFrame(move);
     };
 
     animationFrameId = requestAnimationFrame(move);
 
-    // Clean up the animation frame on component unmount
+    // Clean up animation on component unmount
     return () => {
       cancelAnimationFrame(animationFrameId);
     };
   }, [isClient]);
 
-  // Return null on the server and initial client render to avoid hydration errors
+  // Return null on server and initial client render to avoid hydration errors
   if (!isClient) {
     return null;
   }
 
   return (
     <div ref={containerRef} className="relative h-screen w-full overflow-hidden bg-black">
-      <h1
-        ref={textRef}
-        className="absolute text-8xl font-extrabold tracking-tight"
-        style={{
-          transform: `translate(${positionRef.current.x}px, ${positionRef.current.y}px)`,
-          color: colorRef.current,
-          textShadow: `0 0 10px ${colorRef.current}, 0 0 20px ${colorRef.current}`,
-          willChange: 'transform',
-        }}
-      >
-        404
-      </h1>
+      {elementsRef.current.map(el => (
+        <h1
+          key={el.id}
+          ref={el.ref}
+          className={el.className}
+          style={{
+            transform: `translate(${el.x}px, ${el.y}px)`,
+            color: el.color,
+            textShadow: `0 0 10px ${el.color}, 0 0 20px ${el.color}`,
+            willChange: 'transform',
+          }}
+        >
+          {el.text}
+        </h1>
+      ))}
     </div>
   );
 }
