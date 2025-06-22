@@ -32,6 +32,7 @@ interface BouncingElement {
 
 export default function NotFound() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const centerContentRef = useRef<HTMLDivElement>(null);
   
   // Use useMemo with static values to prevent SSR issues.
   const elements = useMemo<BouncingElement[]>(() => {
@@ -93,41 +94,62 @@ export default function NotFound() {
     let animationFrameId: number;
 
     const move = () => {
-      if (!containerRef.current) {
+      if (!containerRef.current || !centerContentRef.current) {
         animationFrameId = requestAnimationFrame(move);
         return;
       }
       const container = containerRef.current.getBoundingClientRect();
+      const centerRect = centerContentRef.current.getBoundingClientRect();
       
       elementsRef.current.forEach(el => {
         const textEl = el.ref.current;
         if (!textEl) return;
         
         const textRect = textEl.getBoundingClientRect();
-        if (textRect.width === 0) return;
+        if (textRect.width === 0 || textRect.height === 0) return;
 
         let wallHit = false;
 
-        el.x += el.vx;
-        el.y += el.vy;
+        let nextX = el.x + el.vx;
+        let nextY = el.y + el.vy;
 
+        // Check for collision with the central content box
+        const isCollidingWithCenter =
+          nextX < centerRect.right &&
+          nextX + textRect.width > centerRect.left &&
+          nextY < centerRect.bottom &&
+          nextY + textRect.height > centerRect.top;
+
+        if (isCollidingWithCenter) {
+          wallHit = true;
+          // Simple bounce: reverse both velocities to bounce away
+          el.vx *= -1;
+          el.vy *= -1;
+          el.x += el.vx;
+          el.y += el.vy;
+        } else {
+          el.x = nextX;
+          el.y = nextY;
+        }
+
+        // Check for collision with container walls
         if (el.x <= 0) {
           el.x = 0;
-          el.vx = -el.vx;
+          el.vx *= -1;
           wallHit = true;
         } else if (el.x + textRect.width >= container.width) {
           el.x = container.width - textRect.width;
-          el.vx = -el.vx;
+          el.vx *= -1;
           wallHit = true;
         }
 
         if (el.y <= 0) {
           el.y = 0;
-          el.vy = -el.vy;
+          el.vy *= -1;
           wallHit = true;
         } else if (el.y + textRect.height >= container.height) {
           el.y = container.height - textRect.height;
-          el.vy = -el.vy;
+          el.vy *= -1;
           wallHit = true;
         }
 
@@ -168,7 +190,7 @@ export default function NotFound() {
 
   return (
     <div ref={containerRef} className="relative h-screen w-full overflow-hidden bg-black">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center" style={{ zIndex: 10 }}>
+      <div ref={centerContentRef} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center" style={{ zIndex: 10 }}>
         <h1
           className="text-8xl font-extrabold tracking-tight flex flex-col items-center"
           style={{
