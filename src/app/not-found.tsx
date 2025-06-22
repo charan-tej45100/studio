@@ -6,14 +6,10 @@ import Link from 'next/link';
 import { Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-// A list of colors to cycle through on each bounce
+// A list of colors to cycle through for the police light effect
 const colors = [
   '#FF143C', // Red
-  '#39FF14', // Green
   '#1E90FF', // DodgerBlue
-  '#FFD700', // Gold
-  '#FF69B4', // HotPink
-  '#9400D3', // DarkViolet
 ];
 
 interface BouncingElement {
@@ -25,7 +21,6 @@ interface BouncingElement {
   vy: number;
   color: string;
   className: string;
-  isBlinking: boolean;
   blinkOffset: number;
   ref: React.RefObject<HTMLHeadingElement>;
 }
@@ -34,11 +29,9 @@ export default function NotFound() {
   const containerRef = useRef<HTMLDivElement>(null);
   const centerContentRef = useRef<HTMLDivElement>(null);
   
-  // Use useMemo with static values to prevent SSR issues.
   const elements = useMemo<BouncingElement[]>(() => {
     const initialElements: BouncingElement[] = [];
     
-    // 11 small 404s
     for (let i = 1; i <= 11; i++) {
       initialElements.push({
         id: i,
@@ -49,7 +42,6 @@ export default function NotFound() {
         vy: 1,
         color: colors[i % colors.length],
         className: 'absolute text-2xl font-bold tracking-tight',
-        isBlinking: true,
         blinkOffset: 0,
         ref: React.createRef<HTMLHeadingElement>(),
       });
@@ -115,8 +107,6 @@ export default function NotFound() {
         const textRect = textEl.getBoundingClientRect();
         if (textRect.width === 0 || textRect.height === 0) return;
 
-        let wallHit = false;
-
         // Update position for this frame
         el.x += el.vx;
         el.y += el.vy;
@@ -134,7 +124,6 @@ export default function NotFound() {
         const combinedHalfHeights = textRect.height / 2 + centerRect.height / 2;
         
         if (Math.abs(dx) < combinedHalfWidths && Math.abs(dy) < combinedHalfHeights) {
-          wallHit = true;
           const overlapX = combinedHalfWidths - Math.abs(dx);
           const overlapY = combinedHalfHeights - Math.abs(dy);
 
@@ -156,37 +145,22 @@ export default function NotFound() {
         if (el.x <= 0) {
           el.x = 0;
           el.vx *= -1;
-          wallHit = true;
         } else if (el.x + textRect.width >= container.width) {
           el.x = container.width - textRect.width;
           el.vx *= -1;
-          wallHit = true;
         }
 
         if (el.y <= 0) {
           el.y = 0;
           el.vy *= -1;
-          wallHit = true;
         } else if (el.y + textRect.height >= container.height) {
           el.y = container.height - textRect.height;
           el.vy *= -1;
-          wallHit = true;
         }
 
-        if (wallHit) {
-          const currentIndex = colors.indexOf(el.color);
-          const nextIndex = (currentIndex + 1) % colors.length;
-          el.color = colors[nextIndex];
-        }
-
-        let displayColor = el.color;
-        if (el.isBlinking) {
-          // Use the offset to make blinking appear at random intervals
-          const shouldBeWhite = Math.floor((Date.now() + el.blinkOffset) / 300) % 2 === 0;
-          if (shouldBeWhite) {
-            displayColor = '#FFFFFF';
-          }
-        }
+        // Police light blinking effect
+        const cycle = Math.floor((Date.now() + el.blinkOffset) / 250) % colors.length;
+        const displayColor = colors[cycle];
 
         // Directly manipulate the DOM for performance
         textEl.style.transform = `translate(${el.x}px, ${el.y}px)`;
