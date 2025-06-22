@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect, useRef, useMemo } from 'react';
@@ -21,6 +22,7 @@ interface BouncingElement {
   vy: number;
   color: string;
   className: string;
+  isBlinking: boolean;
   ref: React.RefObject<HTMLHeadingElement>;
 }
 
@@ -41,6 +43,7 @@ export default function NotFound() {
       vy: 1.5,
       color: colors[0],
       className: 'absolute text-8xl font-extrabold tracking-tight',
+      isBlinking: false,
       ref: React.createRef<HTMLHeadingElement>(),
     });
 
@@ -55,6 +58,7 @@ export default function NotFound() {
         vy: 1,
         color: colors[i % colors.length],
         className: 'absolute text-2xl font-bold tracking-tight',
+        isBlinking: Math.random() < 0.3, // ~30% of small 404s will blink
         ref: React.createRef<HTMLHeadingElement>(),
       });
     }
@@ -130,10 +134,18 @@ export default function NotFound() {
           el.color = colors[nextIndex];
         }
 
+        let displayColor = el.color;
+        if (el.isBlinking) {
+          const shouldBeWhite = Math.floor(Date.now() / 300) % 2 === 0; // Blink every 300ms
+          if (shouldBeWhite) {
+            displayColor = '#FFFFFF';
+          }
+        }
+
         // Directly manipulate the DOM for performance
         textEl.style.transform = `translate(${el.x}px, ${el.y}px)`;
-        textEl.style.color = el.color;
-        textEl.style.textShadow = `0 0 10px ${el.color}, 0 0 20px ${el.color}`;
+        textEl.style.color = displayColor;
+        textEl.style.textShadow = `0 0 10px ${displayColor}, 0 0 20px ${displayColor}`;
       });
 
       animationFrameId = requestAnimationFrame(move);
