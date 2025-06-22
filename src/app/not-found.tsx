@@ -117,26 +117,39 @@ export default function NotFound() {
 
         let wallHit = false;
 
-        let nextX = el.x + el.vx;
-        let nextY = el.y + el.vy;
+        // Update position for this frame
+        el.x += el.vx;
+        el.y += el.vy;
+        
+        // AABB collision detection with the central content box
+        const elCenterX = el.x + textRect.width / 2;
+        const elCenterY = el.y + textRect.height / 2;
+        const boxCenterX = (centerRect.left - container.left) + centerRect.width / 2;
+        const boxCenterY = (centerRect.top - container.top) + centerRect.height / 2;
 
-        // Check for collision with the central content box
-        const isCollidingWithCenter =
-          nextX < centerRect.right - container.left &&
-          nextX + textRect.width > centerRect.left - container.left &&
-          nextY < centerRect.bottom - container.top &&
-          nextY + textRect.height > centerRect.top - container.top;
+        const dx = elCenterX - boxCenterX;
+        const dy = elCenterY - boxCenterY;
 
-        if (isCollidingWithCenter) {
+        const combinedHalfWidths = textRect.width / 2 + centerRect.width / 2;
+        const combinedHalfHeights = textRect.height / 2 + centerRect.height / 2;
+        
+        if (Math.abs(dx) < combinedHalfWidths && Math.abs(dy) < combinedHalfHeights) {
           wallHit = true;
-          // Simple bounce: reverse both velocities to bounce away
-          el.vx *= -1;
-          el.vy *= -1;
-          el.x += el.vx;
-          el.y += el.vy;
-        } else {
-          el.x = nextX;
-          el.y = nextY;
+          const overlapX = combinedHalfWidths - Math.abs(dx);
+          const overlapY = combinedHalfHeights - Math.abs(dy);
+
+          // Determine which axis has the smallest overlap
+          if (overlapX >= overlapY) {
+            // Collision is on the Y axis (top/bottom)
+            el.vy *= -1;
+            // Correct the position to be outside the box
+            el.y += dy > 0 ? overlapY : -overlapY;
+          } else {
+            // Collision is on the X axis (left/right)
+            el.vx *= -1;
+            // Correct the position to be outside the box
+            el.x += dx > 0 ? overlapX : -overlapX;
+          }
         }
 
         // Check for collision with container walls
