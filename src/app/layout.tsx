@@ -7,7 +7,7 @@ import { Providers } from '@/components/providers';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
-  title: 'Charan UI Kit',
+  title: "Charan's Proj-ect",
   description: 'Interactive UI elements inspired by modern design.',
 };
 
