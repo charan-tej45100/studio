@@ -34,21 +34,6 @@ export default function NotFound() {
   const elements = useMemo<BouncingElement[]>(() => {
     const initialElements: BouncingElement[] = [];
     
-    // Main 404
-    initialElements.push({
-      id: 0,
-      text: '404',
-      x: 150,
-      y: 150,
-      vx: 1.5,
-      vy: 1.5,
-      color: '#FF143C', // Red
-      className: 'absolute text-8xl font-extrabold tracking-tight flex flex-col items-center',
-      isBlinking: false,
-      blinkOffset: 0,
-      ref: React.createRef<HTMLHeadingElement>(),
-    });
-
     // 11 small 404s
     for (let i = 1; i <= 11; i++) {
       initialElements.push({
@@ -132,7 +117,7 @@ export default function NotFound() {
           wallHit = true;
         }
 
-        if (wallHit && el.id !== 0) {
+        if (wallHit) {
           const currentIndex = colors.indexOf(el.color);
           const nextIndex = (currentIndex + 1) % colors.length;
           el.color = colors[nextIndex];
@@ -169,6 +154,27 @@ export default function NotFound() {
 
   return (
     <div ref={containerRef} className="relative h-screen w-full overflow-hidden bg-black">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style={{ zIndex: 1 }}>
+        <h1
+          className="text-8xl font-extrabold tracking-tight flex flex-col items-center"
+          style={{
+            color: '#FF143C',
+            textShadow: `0 0 10px #FF143C, 0 0 20px #FF143C`,
+          }}
+        >
+          404
+          <p
+            className="glitch text-4xl font-bold mt-[-10px]"
+            data-text="Page not Found"
+            style={{
+              textShadow: '0 0 5px white, 0 0 10px white'
+            }}
+          >
+            Page not Found
+          </p>
+        </h1>
+      </div>
+      
       {elementsRef.current.map(el => (
         <h1
           key={el.id}
@@ -179,21 +185,9 @@ export default function NotFound() {
             color: el.color,
             textShadow: `0 0 10px ${el.color}, 0 0 20px ${el.color}`,
             willChange: 'transform, color, text-shadow',
-            zIndex: el.id === 0 ? 1 : 'auto',
           }}
         >
           {el.text}
-          {el.id === 0 && (
-            <p
-              className="glitch text-4xl font-bold mt-[-10px]"
-              data-text="Page not Found"
-              style={{
-                textShadow: '0 0 5px white, 0 0 10px white'
-              }}
-            >
-              Page not Found
-            </p>
-          )}
         </h1>
       ))}
     </div>
