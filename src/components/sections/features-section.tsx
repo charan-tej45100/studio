@@ -25,7 +25,7 @@ const features = [
   {
     icon: <Zap className="h-10 w-10 text-accent mb-4" />,
     title: 'Developer Friendly',
-    description: 'Built with Next.js and Tailwind CSS, our UI kit is optimized for performance and offers a smooth development experience.',
+    description: 'Built with Next.js and Tailwind CSS, our WEBSITE is optimized for performance and offers a smooth development experience.',
     link: '/getting-started',
   },
 ];
