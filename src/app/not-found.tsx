@@ -69,8 +69,10 @@ export default function NotFound() {
     elementsRef.current.forEach(el => {
       const container = containerRef.current;
       if (container) {
-          el.x = Math.random() * (container.clientWidth - 250);
-          el.y = Math.random() * (container.clientHeight - 250);
+          // Use a smaller offset to prevent clumping and ensure elements spawn within bounds
+          const elementApproxWidth = 80;
+          el.x = Math.random() * (container.clientWidth - elementApproxWidth);
+          el.y = Math.random() * (container.clientHeight - elementApproxWidth);
       }
       el.vx = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 1 + 0.5);
       el.vy = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 1 + 0.5);
@@ -115,10 +117,10 @@ export default function NotFound() {
 
         // Check for collision with the central content box
         const isCollidingWithCenter =
-          nextX < centerRect.right &&
-          nextX + textRect.width > centerRect.left &&
-          nextY < centerRect.bottom &&
-          nextY + textRect.height > centerRect.top;
+          nextX < centerRect.right - container.left &&
+          nextX + textRect.width > centerRect.left - container.left &&
+          nextY < centerRect.bottom - container.top &&
+          nextY + textRect.height > centerRect.top - container.top;
 
         if (isCollidingWithCenter) {
           wallHit = true;
