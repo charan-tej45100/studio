@@ -62,23 +62,28 @@ export default function NotFound() {
   const [isGlowing, setIsGlowing] = useState(false);
 
   useEffect(() => {
-    // Run only on client
+    // This effect runs once on the client to trigger re-rendering with client-side state
     setIsClient(true);
-    
-    // Randomize properties on the client to avoid hydration mismatch
-    elementsRef.current.forEach(el => {
-      const container = containerRef.current;
-      if (container) {
-          // Use a smaller offset to prevent clumping and ensure elements spawn within bounds
+  }, []);
+
+  useEffect(() => {
+    // This effect runs after the component is mounted on the client and isClient is true
+    if (isClient) {
+      // Randomize properties on the client to avoid hydration mismatch,
+      // now that the container ref is guaranteed to be available.
+      elementsRef.current.forEach(el => {
+        const container = containerRef.current;
+        if (container) {
           const elementApproxWidth = 80;
           el.x = Math.random() * (container.clientWidth - elementApproxWidth);
           el.y = Math.random() * (container.clientHeight - elementApproxWidth);
-      }
-      el.vx = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 1 + 0.5);
-      el.vy = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 1 + 0.5);
-      el.blinkOffset = Math.random() * 1000; // Add random blink offset
-    });
-  }, []);
+          el.vx = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 1 + 0.5);
+          el.vy = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 1 + 0.5);
+          el.blinkOffset = Math.random() * 1000; // Add random blink offset
+        }
+      });
+    }
+  }, [isClient]);
 
   useEffect(() => {
     if (!isClient) return;
