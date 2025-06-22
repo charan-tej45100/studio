@@ -53,6 +53,13 @@ export default function NotFound() {
   const [isClient, setIsClient] = useState(false);
   const [isGlowing, setIsGlowing] = useState(false);
   const [isFlashing, setIsFlashing] = useState(false);
+  const [lightningBolt, setLightningBolt] = useState<{
+    key: number;
+    top: string;
+    left: string;
+    transform: string;
+  } | null>(null);
+
 
   useEffect(() => {
     // This effect runs once on the client to trigger re-rendering with client-side state
@@ -94,12 +101,21 @@ export default function NotFound() {
     let flashTimeout: NodeJS.Timeout;
 
     const triggerFlash = () => {
+      if (containerRef.current) {
+        const top = `${Math.random() * 80}vh`;
+        const left = `${Math.random() * 80}vw`;
+        const transform = `rotate(${Math.random() * 360}deg) scale(${Math.random() * 0.5 + 0.8})`;
+        setLightningBolt({ key: Date.now(), top, left, transform });
+      }
+
       setIsFlashing(true);
+      
       setTimeout(() => {
         setIsFlashing(false);
-      }, 75); // Flash duration
+        setLightningBolt(null);
+      }, 100); // Flash duration
 
-      const nextFlashIn = Math.random() * 5000 + 2000; // Next flash in 2-7 seconds
+      const nextFlashIn = Math.random() * 5000 + 3000; // Next flash in 3-8 seconds
       flashTimeout = setTimeout(triggerFlash, nextFlashIn);
     };
 
@@ -207,6 +223,22 @@ export default function NotFound() {
     <div ref={containerRef} className="relative h-screen w-full overflow-hidden bg-black">
       {isFlashing && (
         <div className="absolute inset-0 z-[100] bg-white opacity-80 pointer-events-none"></div>
+      )}
+      {lightningBolt && (
+        <svg
+          key={lightningBolt.key}
+          viewBox="0 0 32 32"
+          className="absolute z-[101] pointer-events-none w-48 h-auto"
+          style={{
+            top: lightningBolt.top,
+            left: lightningBolt.left,
+            transform: lightningBolt.transform,
+            filter: 'drop-shadow(0 0 15px white) drop-shadow(0 0 30px white)',
+          }}
+          fill="rgba(255, 255, 255, 0.9)"
+        >
+          <path d="M17.47,1.25l-9,15A1,1,0,0,0,9.3,18H14.8L13,29.75a1,1,0,0,0,1.74.82l9-18A1,1,0,0,0,22.7,11H17.2l1.8-8.22A1,1,0,0,0,17.47,1.25Z" />
+        </svg>
       )}
       <div ref={centerContentRef} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center" style={{ zIndex: 10 }}>
         <h1
