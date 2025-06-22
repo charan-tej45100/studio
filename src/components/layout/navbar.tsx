@@ -49,7 +49,7 @@ export function Navbar() {
             <Link
               key={link.label}
               href={link.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-[#39FF14]"
+              className="inline-block transform text-sm font-medium text-muted-foreground transition-all duration-200 hover:scale-110 hover:text-[#39FF14]"
             >
               {link.label}
             </Link>
@@ -79,7 +79,7 @@ export function Navbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-[#39FF14]"
+                className="inline-block transform text-sm font-medium text-muted-foreground transition-all duration-200 hover:scale-110 hover:text-[#39FF14]"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {link.label}
