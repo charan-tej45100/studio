@@ -13,7 +13,7 @@ const features = [
   {
     icon: <Palette className="h-10 w-10 text-accent mb-4" />,
     title: 'Easy Theme Customization',
-    description: 'Effortlessly adapt the look and feel to match your brand with our intuitive theming system. Switch between light and dark modes seamlessly.',
+    description: 'Better COlor Scheme.',
     link: '/theming',
   },
   {
