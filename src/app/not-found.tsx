@@ -43,7 +43,7 @@ export default function NotFound() {
       vy: 1.5,
       color: colors[0],
       className: 'absolute text-8xl font-extrabold tracking-tight',
-      isBlinking: false,
+      isBlinking: true,
       ref: React.createRef<HTMLHeadingElement>(),
     });
 
@@ -58,7 +58,7 @@ export default function NotFound() {
         vy: 1,
         color: colors[i % colors.length],
         className: 'absolute text-2xl font-bold tracking-tight',
-        isBlinking: Math.random() < 0.3, // ~30% of small 404s will blink
+        isBlinking: true,
         ref: React.createRef<HTMLHeadingElement>(),
       });
     }
