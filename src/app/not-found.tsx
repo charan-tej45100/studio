@@ -53,6 +53,7 @@ export default function NotFound() {
   const [isClient, setIsClient] = useState(false);
   const [isGlowing, setIsGlowing] = useState(false);
   const [isFlashing, setIsFlashing] = useState(false);
+  const [isGlitchingIntensely, setIsGlitchingIntensely] = useState(false);
   const [lightningBolt, setLightningBolt] = useState<{
     key: number;
     top: string;
@@ -109,11 +110,13 @@ export default function NotFound() {
       }
 
       setIsFlashing(true);
+      setIsGlitchingIntensely(true);
       
       setTimeout(() => {
         setIsFlashing(false);
         setLightningBolt(null);
-      }, 100); // Flash duration
+        setIsGlitchingIntensely(false);
+      }, 120); // Flash duration
 
       const nextFlashIn = Math.random() * 5000 + 3000; // Next flash in 3-8 seconds
       flashTimeout = setTimeout(triggerFlash, nextFlashIn);
@@ -253,7 +256,7 @@ export default function NotFound() {
         >
           404
           <p
-            className="glitch text-4xl font-bold mt-[-10px]"
+            className={`glitch text-4xl font-bold mt-[-10px] ${isGlitchingIntensely ? 'glitch-intensifies' : ''}`}
             data-text="Page not Found"
             style={{
               textShadow: '0 0 5px white, 0 0 10px white'
