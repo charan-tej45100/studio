@@ -52,6 +52,7 @@ export default function NotFound() {
   const elementsRef = useRef<BouncingElement[]>(elements);
   const [isClient, setIsClient] = useState(false);
   const [isGlowing, setIsGlowing] = useState(false);
+  const [isFlashing, setIsFlashing] = useState(false);
 
   useEffect(() => {
     // This effect runs once on the client to trigger re-rendering with client-side state
@@ -85,6 +86,26 @@ export default function NotFound() {
     }, 1500); // Pulse every 1.5 seconds
 
     return () => clearInterval(intervalId);
+  }, [isClient]);
+
+  useEffect(() => {
+    if (!isClient) return;
+
+    let flashTimeout: NodeJS.Timeout;
+
+    const triggerFlash = () => {
+      setIsFlashing(true);
+      setTimeout(() => {
+        setIsFlashing(false);
+      }, 75); // Flash duration
+
+      const nextFlashIn = Math.random() * 5000 + 2000; // Next flash in 2-7 seconds
+      flashTimeout = setTimeout(triggerFlash, nextFlashIn);
+    };
+
+    flashTimeout = setTimeout(triggerFlash, Math.random() * 5000 + 2000);
+
+    return () => clearTimeout(flashTimeout);
   }, [isClient]);
 
   useEffect(() => {
@@ -184,6 +205,9 @@ export default function NotFound() {
 
   return (
     <div ref={containerRef} className="relative h-screen w-full overflow-hidden bg-black">
+      {isFlashing && (
+        <div className="absolute inset-0 z-[100] bg-white opacity-80 pointer-events-none"></div>
+      )}
       <div ref={centerContentRef} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center" style={{ zIndex: 10 }}>
         <h1
           className="text-8xl font-extrabold tracking-tight flex flex-col items-center"
