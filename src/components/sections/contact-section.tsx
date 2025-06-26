@@ -1,4 +1,3 @@
-
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -111,7 +110,7 @@ export function ContactSection() {
                     <FormControl>
                       <div className="relative">
                         <Phone className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
-                        <Input type="tel" placeholder="e.g. +91 98765 43210" {...field} className="h-12 pl-10" />
+                        <Input type="tel" placeholder="e.g. +91 99999 88888" {...field} className="h-12 pl-10" />
                       </div>
                     </FormControl>
                     <FormMessage />
